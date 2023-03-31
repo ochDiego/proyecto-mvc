@@ -6,7 +6,7 @@
         public static function conectar()
         {
             try {
-                $dns="mysql:host=" . DB_HOST . ";dbname=" . DB_NAME . " ;charset=utf8";
+                $dns="mysql:host=" . DB_HOST . ";dbname=" . DB_NAME . ";charset=utf8"; 
                 $options=[
                     PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
                     PDO::ATTR_EMULATE_PREPARES => false
