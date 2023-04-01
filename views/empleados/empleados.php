@@ -47,7 +47,7 @@
                                         <td class="text-center"><?= $empleado['fecha_creacion']; ?></td>
                                         <td class="text-center"><?= $empleado['fecha_actualizacion']; ?></td>
                                         <td class="text-center">
-                                            <a name="" id="" class="btn btn-info btn-sm" href="index.php?c=Empleado&m=edit&id=<?= $empleado['id']; ?>" role="button">Edit</a>
+                                            <a name="" id="" class="btn btn-info btn-sm" href="index.php?c=Empleado&m=edit&id=<?= $empleado['id']; ?>&token=<?= hash_hmac('sha1',$empleado['id'],KEY_TOKEN); ?>" role="button">Edit</a>
 
                                             <!-- Button trigger modal -->
                                             <a class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal<?= $empleado['id']; ?>">Delete</a>
@@ -66,7 +66,7 @@
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                                     
-                                                    <a name="" id="" class="btn btn-danger" href="index.php?c=Empleado&m=destroy&id=<?= $empleado['id']; ?>" role="button">Delete</a>
+                                                    <a name="" id="" class="btn btn-danger" href="index.php?c=Empleado&m=destroy&id=<?= $empleado['id']; ?>&token=<?= hash_hmac('sha1',$empleado['id'],KEY_TOKEN); ?>" role="button">Delete</a>
                                                 </div>
                                                 </div>
                                             </div>
@@ -90,3 +90,5 @@
         </div>
 
 <?php include_once 'views/templates/footer.php'; ?>
+<script src="assets/js/dataTables.js"></script>
+

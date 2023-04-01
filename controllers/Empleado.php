@@ -66,14 +66,22 @@
             }
         }
 
-        public function edit($id)
+        public function edit($id=null,$token=null)
         {
-            $data['id']=$id;
-            $data['empleado']=$this->empleado->getEmpleado($id);
-            $data['puestos']=$this->empleado->getPuestos();
-            $data['titulo']="Actualizar registro";
+            $tmpToken=hash_hmac('sha1',$id,KEY_TOKEN);
 
-            require_once 'views/empleados/edit.php';
+            if($tmpToken!=$token){
+                header("location:index.php");
+            }else{
+
+                $data['id']=$id;
+                $data['empleado']=$this->empleado->getEmpleado($id);
+                $data['puestos']=$this->empleado->getPuestos();
+                $data['titulo']="Actualizar registro";
+    
+                require_once 'views/empleados/edit.php';
+            }
+
         }
 
         public function update()
@@ -131,16 +139,25 @@
             }
         }
 
-        public function destroy($id)
+        public function destroy($id=null,$token=null)
         {
-            $deleteEmpleado=$this->empleado->deleteEmpleado($id);
 
-            if($deleteEmpleado){
-                $_SESSION['msj']="Empleado eliminado";
+            $tmpToken=hash_hmac('sha1',$id,KEY_TOKEN);
 
+            if($tmpToken!=$token){
                 header("location:index.php");
             }else{
-                header("location:index.php");
+
+                $deleteEmpleado=$this->empleado->deleteEmpleado($id);
+    
+                if($deleteEmpleado){
+                    $_SESSION['msj']="Empleado eliminado";
+    
+                    header("location:index.php");
+                }else{
+                    header("location:index.php");
+                }
             }
+
         }
     }
